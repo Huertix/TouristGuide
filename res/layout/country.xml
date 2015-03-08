@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   android:orientation="vertical"
+   android:layout_width="fill_parent"
+   android:layout_height="fill_parent"
+   >
+   
+       
+	<TextView 
+	    android:id="@+id/country_activity_country"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:gravity="center"
+	    android:textSize="34dp"
+	    android:background="#AA114422"/> 
+	    
+	<TextView 
+	    android:id="@+id/choose_activity_country"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:gravity="center"
+	    android:textSize="30dp"
+	    android:background="#55114400"
+	    android:text="@string/choosecity"/> 
+	    
+	<ListView
+	    android:id="@+id/list_cities"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    />
+	
+
+</LinearLayout>

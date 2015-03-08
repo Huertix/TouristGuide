@@ -1,0 +1,65 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+   	android:layout_width="fill_parent"
+   	android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+	    android:textSize="30dp"
+	    android:background="#55114422"
+        android:text="@string/addplace" />
+    
+     <EditText 
+	    android:id="@+id/addCountry"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:hint="Country"/> 
+    
+    <EditText 
+	    android:id="@+id/addCity"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:hint="City"/> 
+	    
+    <EditText 
+	    android:id="@+id/addip"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:hint="Interested Point"/> 
+	    
+    <EditText 
+	    android:id="@+id/addlatitude"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:hint="Lat: 40.345"/> 
+	    
+    <EditText 
+	    android:id="@+id/addlongitude"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:hint="Long: -3.456"/> 
+	    
+    <EditText 
+	    android:id="@+id/add_url_wiki"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:hint="URL Wikipedia"/> 
+	    
+    <Button 
+	    android:id="@+id/add_src_pic"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:text="Take Picture"/> 
+	    
+    <Button 
+	    android:id="@+id/add_done"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:textSize="25dp"
+	    android:gravity="center|bottom"
+	    android:text="Save"/> 
+
+</LinearLayout>

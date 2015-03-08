@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   android:orientation="vertical"
+   android:layout_width="fill_parent"
+   android:layout_height="fill_parent"
+   >
+   
+       
+	<TextView 
+	    android:id="@+id/choose_activity_main"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:gravity="center"
+	    android:textSize="30dp"
+	    android:background="#55114422"
+	    android:text="@string/choosecountry"/> 
+
+	    
+	<ListView
+	    android:id="@+id/list_countries"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    />
+	    
+
+
+</LinearLayout>
