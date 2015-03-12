@@ -11,8 +11,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.view.View.OnClickListener;
 
+
 public class AddPlace extends Activity {
 	
+	private static final int CODE_ACTIVITY_MAP = 1;	
+	private static final int REQUEST_CODE = 10;
 	private DatabaseHandler data_handler; 
 	private Button button_save;
 	private Button button_getCoord;
@@ -24,6 +27,7 @@ public class AddPlace extends Activity {
 	private EditText lat;
 	private EditText lng;
 	private EditText url;
+	
 	
 	
 	
@@ -92,7 +96,7 @@ public class AddPlace extends Activity {
 	            	
 	            	
 	            	Intent i_map = new Intent(AddPlace.this, Map.class);
-	            	startActivity(i_map);
+	            	startActivityForResult(i_map, CODE_ACTIVITY_MAP );
 	            	
 	            	
 	            	
@@ -122,4 +126,24 @@ public class AddPlace extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	    // TODO Auto-generated method stub
+		Toast.makeText(getApplicationContext(),"1", 
+                Toast.LENGTH_LONG).show();
+		
+		
+		if ((requestCode == CODE_ACTIVITY_MAP )){
+			if(resultCode == Activity.RESULT_OK){
+			
+				Toast.makeText(getApplicationContext(),"2", 
+	                    Toast.LENGTH_LONG).show();
+		    	
+		        lat.setText(data.getStringExtra("lat").substring(0, 9));
+		        lng.setText(data.getStringExtra("lng").substring(0, 9));	        
+			}
+	    }
+	} 
 }

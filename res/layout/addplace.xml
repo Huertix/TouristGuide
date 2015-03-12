@@ -41,17 +41,27 @@
    			android:layout_height="wrap_content"
    			android:layout_weight="1">
    			
+        	<TextView
+        	    android:layout_width="wrap_content"
+		    	android:layout_height="wrap_content"
+		    	android:text="Lat:"/>
+        	
         	<EditText 
 		   		android:id="@+id/addlatitude"
 		   	 	android:layout_width="fill_parent"
 		    	android:layout_height="wrap_content"
-		   		android:hint="Lat: 40.345"/> 
+		   		android:hint="40.345"/> 
+		   		
+        	<TextView
+        	    android:layout_width="wrap_content"
+		    	android:layout_height="wrap_content"
+		    	android:text="Lng:"/>
 		    
 	   	 	<EditText 
 		    	android:id="@+id/addlongitude"
 		    	android:layout_width="fill_parent"
 		    	android:layout_height="wrap_content"
-		    	android:hint="Long: -3.456"/> 
+		    	android:hint="-3.456"/> 
 		</LinearLayout>
 		
 		<Button 
