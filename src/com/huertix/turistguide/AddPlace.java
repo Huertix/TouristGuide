@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 import android.view.View.OnClickListener;
 
 public class AddPlace extends Activity {
@@ -15,6 +16,7 @@ public class AddPlace extends Activity {
 	private Button button_save;
 	private Button button_getCoord;
 	private Button button_take_pic;
+	private Button button_map;
 	private EditText country;
 	private EditText city;
 	private EditText ip;
@@ -74,6 +76,18 @@ public class AddPlace extends Activity {
 	 
 	              //Intent openBrowser =  new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.javacodegeeks.com"));
 	              //startActivity(openBrowser);
+	            }
+	 
+	        });
+    	
+    	button_map = (Button) findViewById(R.id.map_btn);	 
+    	button_map.setOnClickListener(new OnClickListener() {
+	 
+	            @Override
+	            public void onClick(View view) {
+	 
+	            	Toast.makeText(getApplicationContext(),"MAP", 
+	                        Toast.LENGTH_LONG).show();
 	            }
 	 
 	        });

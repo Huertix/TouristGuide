@@ -30,18 +30,39 @@
 	    android:layout_height="wrap_content"
 	    android:hint="Interested Point"/> 
 	    
-    <EditText 
-	    android:id="@+id/addlatitude"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:hint="Lat: 40.345"/> 
-	    
-    <EditText 
-	    android:id="@+id/addlongitude"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:hint="Long: -3.456"/> 
-	    
+    <LinearLayout 
+        android:orientation="horizontal"
+   		android:layout_width="fill_parent"
+   		android:layout_height="wrap_content">
+	
+         <LinearLayout 
+        	android:orientation="vertical"
+   			android:layout_width="fill_parent"
+   			android:layout_height="wrap_content"
+   			android:layout_weight="1">
+   			
+        	<EditText 
+		   		android:id="@+id/addlatitude"
+		   	 	android:layout_width="fill_parent"
+		    	android:layout_height="wrap_content"
+		   		android:hint="Lat: 40.345"/> 
+		    
+	   	 	<EditText 
+		    	android:id="@+id/addlongitude"
+		    	android:layout_width="fill_parent"
+		    	android:layout_height="wrap_content"
+		    	android:hint="Long: -3.456"/> 
+		</LinearLayout>
+		
+		<Button 
+	    	android:id="@+id/map_btn"
+	   		android:layout_width="fill_parent"
+	    	android:layout_height="fill_parent"
+	    	android:text="MAP"
+	    	android:layout_weight="2"/> 	
+	</LinearLayout>
+	
+    
     <EditText 
 	    android:id="@+id/add_url_wiki"
 	    android:layout_width="fill_parent"

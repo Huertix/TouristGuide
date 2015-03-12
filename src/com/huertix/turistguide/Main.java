@@ -39,7 +39,7 @@ public class Main extends Activity  {
 	private ListView myListView;
 	private Runnable viewCountries;
 	private ArrayList<String> countries;
-	private final int ID_MENU_EXIT = 1;
+	private final int ID_MENU = 1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -136,10 +136,10 @@ public class Main extends Activity  {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
     	
-		MenuItem itemAdd = menu.add(Menu.NONE,ID_MENU_EXIT,Menu.NONE,R.string.addplace);
+		MenuItem itemAdd = menu.add(Menu.NONE,ID_MENU,Menu.NONE,R.string.addplace);
 		itemAdd.setShortcut('1', 'a');
 		
-		menu.add(Menu.NONE,ID_MENU_EXIT+1,Menu.NONE,R.string.exit);
+		menu.add(Menu.NONE,ID_MENU+1,Menu.NONE,R.string.exit);
 		
 		return true;
 	}
@@ -148,14 +148,18 @@ public class Main extends Activity  {
     public boolean onOptionsItemSelected(MenuItem item)
     {
     	//check selected menu item
-    	if(item.getItemId() == ID_MENU_EXIT)
+    	if(item.getItemId() == ID_MENU)
     	{
+    		
+    		Toast.makeText(getApplicationContext(),"A", 
+                    Toast.LENGTH_LONG).show();
+    		
     		Intent intent = new Intent(Main.this, AddPlace.class);
     		startActivity(intent);
 		
     		return true;
     	}
-    	else if(item.getItemId() == ID_MENU_EXIT+1){
+    	else if(item.getItemId() == ID_MENU+1){
     		//close the Activity
     		this.finish();
     		return true;
