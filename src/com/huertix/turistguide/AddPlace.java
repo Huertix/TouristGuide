@@ -1,6 +1,7 @@
 package com.huertix.turistguide;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -88,6 +89,13 @@ public class AddPlace extends Activity {
 	 
 	            	Toast.makeText(getApplicationContext(),"MAP", 
 	                        Toast.LENGTH_LONG).show();
+	            	
+	            	
+	            	Intent i_map = new Intent(AddPlace.this, Map.class);
+	            	startActivity(i_map);
+	            	
+	            	
+	            	
 	            }
 	 
 	        });

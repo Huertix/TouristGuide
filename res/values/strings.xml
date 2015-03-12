@@ -15,5 +15,6 @@
     <string name="title_activity_ip">Ip</string>
     <string name="viewonmap">Map</string>
     <string name="viewar">AR</string>
+    <string name="title_activity_map">Map</string>
 
 </resources>

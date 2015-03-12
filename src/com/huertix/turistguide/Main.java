@@ -151,7 +151,7 @@ public class Main extends Activity  {
     	if(item.getItemId() == ID_MENU)
     	{
     		
-    		Toast.makeText(getApplicationContext(),"A", 
+    		Toast.makeText(getApplicationContext(),"C", 
                     Toast.LENGTH_LONG).show();
     		
     		Intent intent = new Intent(Main.this, AddPlace.class);
