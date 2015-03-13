@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -104,7 +105,6 @@ public class Main extends Activity  {
 		
 		m_ProgressDialog = ProgressDialog.show(Main.this,    
                 "Please wait...", "Retrieving data ...", true);
-		
 
 		viewCountries = new Runnable(){
             @Override
@@ -114,21 +114,14 @@ public class Main extends Activity  {
 		Thread thread =  new Thread(null, viewCountries, "MagentoBackground");
         thread.start();
         
-        
+        m_ProgressDialog.dismiss();
 	}
 	
 	
 
 	@Override
 	protected void onResume(){
-		super.onResume();
-		
-		Toast.makeText(getApplicationContext(),"Vuelve", 
-                Toast.LENGTH_LONG).show();
-		
-		
-
-		
+		super.onResume();	
 		runOnUiThread(returnRes);
 	}
 	
@@ -185,61 +178,69 @@ public class Main extends Activity  {
         			countries.add(lsFromDB.get(i));
         	}
        
-            m_adapter.notifyDataSetChanged();
-           
-            
+            m_adapter.notifyDataSetChanged();           
             loadCountries();
-            m_ProgressDialog.dismiss();
            
         }
     };
     
     private boolean loadCountries(){
-	
-    	
-    	
+ 	
     	boolean mboolean = false;
 
+    	m_ProgressDialog = ProgressDialog.show(Main.this,    
+                "Please wait...", "Retrieving data ...", true);
+    	
         	SharedPreferences settings = getSharedPreferences("PREFS_NAME", 0);
         	mboolean = settings.getBoolean("FIRST_RUN", false);
         	if (!mboolean) {
-        		// do the thing for the first time */
+        		// do the thing for the first time 
         		AssetManager assetMan = getAssets();
-        		try {
+        		try {	
         			
-        			
-        			
-    				InputStream is = assetMan.open("countries.xml");
+    				InputStream is = assetMan.open("countries.xml"); 
     				
-    				ParseSax ps = new ParseSax(is);
+    				ParseSax ps = new ParseSax(is);   
     				
-    				List<Country> ls = ps.printData();
-    				Toast.makeText(getApplicationContext(),"Size: "+ls.size(), 
-    	                    Toast.LENGTH_LONG).show();
+    				List<Country> ls = ps.returnList();
     				
+    				Toast.makeText(getApplicationContext(),"Size: "+ls.size(),Toast.LENGTH_LONG).show();	
     				
+    				Iterator i = ls.iterator();
+    				int k = 0;
+    				while(i.hasNext()){
+    					Country c = (Country) i.next();
+    					Iterator j = c.getCities().iterator();
+    					while(j.hasNext()){
+    						String s = (String) j.next();
+    						data_handler.addCityToTable(c.getName(), s);
+    						k++;
+    					}	
+    				}
+    				
+    				ps.cleanList();
+    				ls.clear();
+    				Toast.makeText(getApplicationContext(),"Size 2: "+k,Toast.LENGTH_LONG).show();	
+    				
+    					
     				
     			} catch (IOException e) {
     				e.printStackTrace();
     			} catch (Exception e){
     				e.printStackTrace();
-    			}
-
-        		
-        		
+    			}		
         		settings = getSharedPreferences("PREFS_NAME", 0);
     	        SharedPreferences.Editor editor = settings.edit();
     	        editor.putBoolean("FIRST_RUN", true);
-    	        editor.commit();    
+    	        editor.commit(); 
+    	        m_ProgressDialog.dismiss();
     	        return true;
         	                    
         	} else {
         	 // other time your app loads
+        		m_ProgressDialog.dismiss();
         		return false;
         	}
-        		//m_ProgressDialog.dismiss();
-				
-   
     	}
     		
     	

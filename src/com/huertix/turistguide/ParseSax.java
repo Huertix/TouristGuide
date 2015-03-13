@@ -114,13 +114,10 @@ public class ParseSax extends DefaultHandler{
 		}
 		
 		
-		public List<Country> printData(){
+		public List<Country> returnList(){
 
 			return myCountries;
-			
-			
-			
-			
+
 			/*System.out.println("No of Employees '" + myCountries.size() + "'.");
 
 			Iterator it = myCountries.iterator();
@@ -134,6 +131,10 @@ public class ParseSax extends DefaultHandler{
 					
 				}
 			}*/
+		}
+		
+		public void cleanList(){
+			myCountries.clear();
 		}
 		
 		

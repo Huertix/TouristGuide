@@ -93,6 +93,16 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     	ContentValues values = new ContentValues();
     	values.put(KEY_COUNTRY, country);
     	values.put(KEY_CITY, city);
+    	try{	// Inserting Row
+            db.insert(CITY_TABLE, null, values);
+            
+        }
+        catch(SQLiteException e){
+        	Log.v("tag","error sql"+e.getMessage());
+        }
+        
+    	db.close(); // Closing database connection 	
+        
     }
     
     

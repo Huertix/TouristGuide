@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Country{
-	public String country;
-	public List<String> cities;
+	private String country;
+	private List<String> cities;
 
 	
 	public Country(){
@@ -17,8 +17,16 @@ class Country{
 		country = c;
 	}
 	
+	public String getName(){
+		return country;
+	}
+	
 	public void addCity(String t){
 		cities.add(t);
+	}
+	
+	public List<String> getCities(){
+		return cities;
 	}
 	
 
