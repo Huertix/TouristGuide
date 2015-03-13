@@ -17,6 +17,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 	private static final int DATABASE_VERSION = 1;
 	private static final String DATABASE_NAME = "turistguide";
 	private static final String TABLE = "places";
+	private static final String CITY_TABLE = "cities";
 	
 	// Table Columns names
 	private static final String KEY_ID = "id";
@@ -28,6 +29,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     private static final String KEY_WIKI = "url_wiki";
     private static final String KEY_PIC = "src_pic";
     
+    
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -35,11 +37,23 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     // Creating Tables
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_WORDS_TABLE = "CREATE TABLE " + TABLE + "("
+        
+    	/**
+    	 * Creamos la tabla de  lista de paises y ciudades
+    	 */
+    	String CREATE_CITY_TABLE = "CREATE TABLE " + CITY_TABLE + "("
+                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_COUNTRY + " TEXT,"
+                +KEY_CITY+")";
+        db.execSQL(CREATE_CITY_TABLE);
+        
+        /**
+         * Creamos la tabla de Datos de los puntos de interes
+         */
+        String CREATE_PLACES_TABLE = "CREATE TABLE " + TABLE + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_COUNTRY + " TEXT,"
                 +KEY_CITY+" TEXT,"+ KEY_IP + " TEXT," +KEY_LAT+" TEXT,"+KEY_LNG
                 +" TEXT,"+KEY_WIKI+" TEXT,"+KEY_PIC+" TEXT"+")";
-        db.execSQL(CREATE_WORDS_TABLE);
+        db.execSQL(CREATE_PLACES_TABLE);
     }
     
     // Upgrading database
@@ -74,6 +88,13 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         db.close(); // Closing database connection 	
     }
     
+    public void addCityToTable(String country, String city){
+    	SQLiteDatabase db = this.getWritableDatabase();
+    	ContentValues values = new ContentValues();
+    	values.put(KEY_COUNTRY, country);
+    	values.put(KEY_CITY, city);
+    }
+    
     
     public List<String> getCountries(){
     	List<String> countries = new ArrayList<String>();
@@ -92,12 +113,50 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         return countries;
     }
     
+    public List<String> getCountriesFromList(){
+    	List<String> countries = new ArrayList<String>();
+    	
+    	String selectQuery = "SELECT "+KEY_COUNTRY+"  FROM " + CITY_TABLE+" ORDER BY "+KEY_COUNTRY;
+    	
+    	SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        
+        if (cursor.moveToFirst()) {
+            do {
+            	countries.add(cursor.getString(0));
+            }while(cursor.moveToNext());
+        }
+        
+        return countries;
+    }
+    
+    
     public List<String> getCities(String country){
     	List<String> cities = new ArrayList<String>();
     	
     	Log.v("tag","Country: "+country);
     	
     	String selectQuery = "SELECT "+KEY_CITY+"  FROM " + TABLE+" WHERE "+KEY_COUNTRY+"='"+country+"' ORDER BY "+KEY_CITY;
+    	
+    	SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        
+        if (cursor.moveToFirst()) {
+            do {
+            	cities.add(cursor.getString(0));
+            }while(cursor.moveToNext());
+        }
+        
+        return cities;
+    }
+    
+    
+    public List<String> getCitiesFromList(String country){
+    	List<String> cities = new ArrayList<String>();
+    	
+    	Log.v("tag","Country: "+country);
+    	
+    	String selectQuery = "SELECT "+KEY_CITY+"  FROM " + CITY_TABLE+" WHERE "+KEY_COUNTRY+"='"+country+"' ORDER BY "+KEY_CITY;
     	
     	SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);

@@ -41,11 +41,11 @@
             android:label="@string/title_activity_add_place" >
         </activity>
         <activity
-            android:name=".Country"
+            android:name=".CountryActivity"
             android:label="@string/title_activity_country" >
         </activity>
         <activity
-            android:name=".City"
+            android:name=".CityActivity"
             android:label="@string/title_activity_city" >
         </activity>
         <activity
@@ -64,7 +64,8 @@
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyAqJHPdeLIsbPy8bZJnPMHwTOu_Y1PvZaI" />
-        
+
+             
     </application>
 
 </manifest>

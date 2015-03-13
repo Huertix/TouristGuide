@@ -1,14 +1,24 @@
 package com.huertix.turistguide;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Document;
 
 import android.app.Activity;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcel;
@@ -38,6 +48,7 @@ public class Main extends Activity  {
 	private Adapter m_adapter;
 	private ListView myListView;
 	private Runnable viewCountries;
+	private Runnable parseCountries;
 	private ArrayList<String> countries;
 	private final int ID_MENU = 1;
 
@@ -73,19 +84,12 @@ public class Main extends Activity  {
 	        	Bundle extras = new Bundle();
 	        	extras.putString("country",item);
         	
-	        	Intent intent = new Intent(Main.this, Country.class);
+	        	Intent intent = new Intent(Main.this, CountryActivity.class);
 	        	intent.putExtras(extras);
-	        	
-	        	
-	        	
-	        	
 	    		startActivity(intent);
 	        }
 	          
-	        
-	          
-	          
-	          
+          
 	          /*view.animate().setDuration(2000).alpha(0).withEndAction(new Runnable() {
 	                @Override
 	                public void run() {
@@ -98,35 +102,32 @@ public class Main extends Activity  {
 
 	      });
 		
+		m_ProgressDialog = ProgressDialog.show(Main.this,    
+                "Please wait...", "Retrieving data ...", true);
+		
 
 		viewCountries = new Runnable(){
             @Override
-            public void run() {
-            	         	
-            	runOnUiThread(returnRes);
-                
-            }
+            public void run() {runOnUiThread(returnRes);}
         };
+        
 		Thread thread =  new Thread(null, viewCountries, "MagentoBackground");
         thread.start();
-        m_ProgressDialog = ProgressDialog.show(Main.this,    
-             "Please wait...", "Retrieving data ...", true);
-
+        
+        
 	}
 	
 	
-	
-	
-	
-	
-	
-	
+
 	@Override
 	protected void onResume(){
 		super.onResume();
 		
 		Toast.makeText(getApplicationContext(),"Vuelve", 
                 Toast.LENGTH_LONG).show();
+		
+		
+
 		
 		runOnUiThread(returnRes);
 	}
@@ -151,7 +152,7 @@ public class Main extends Activity  {
     	if(item.getItemId() == ID_MENU)
     	{
     		
-    		Toast.makeText(getApplicationContext(),"C", 
+    		Toast.makeText(getApplicationContext(),"AB", 
                     Toast.LENGTH_LONG).show();
     		
     		Intent intent = new Intent(Main.this, AddPlace.class);
@@ -164,8 +165,7 @@ public class Main extends Activity  {
     		this.finish();
     		return true;
     	}
-    	
-    	
+ 	
     	return false;
     }
 	
@@ -176,24 +176,78 @@ public class Main extends Activity  {
 
         @Override
         public void run() {
-        	
+	
         	List<String> lsFromDB = data_handler.getCountries();
-        	
         	countries.clear();
         	
         	for(int i=0;i<lsFromDB.size();i++){
         		if(!countries.contains(lsFromDB.get(i)))
         			countries.add(lsFromDB.get(i));
         	}
-
-            
-            m_ProgressDialog.dismiss();
+       
             m_adapter.notifyDataSetChanged();
+           
+            
+            loadCountries();
+            m_ProgressDialog.dismiss();
+           
         }
     };
+    
+    private boolean loadCountries(){
+	
+    	
+    	
+    	boolean mboolean = false;
 
-	
-	
+        	SharedPreferences settings = getSharedPreferences("PREFS_NAME", 0);
+        	mboolean = settings.getBoolean("FIRST_RUN", false);
+        	if (!mboolean) {
+        		// do the thing for the first time */
+        		AssetManager assetMan = getAssets();
+        		try {
+        			
+        			
+        			
+    				InputStream is = assetMan.open("countries.xml");
+    				
+    				ParseSax ps = new ParseSax(is);
+    				
+    				List<Country> ls = ps.printData();
+    				Toast.makeText(getApplicationContext(),"Size: "+ls.size(), 
+    	                    Toast.LENGTH_LONG).show();
+    				
+    				
+    				
+    			} catch (IOException e) {
+    				e.printStackTrace();
+    			} catch (Exception e){
+    				e.printStackTrace();
+    			}
+
+        		
+        		
+        		settings = getSharedPreferences("PREFS_NAME", 0);
+    	        SharedPreferences.Editor editor = settings.edit();
+    	        editor.putBoolean("FIRST_RUN", true);
+    	        editor.commit();    
+    	        return true;
+        	                    
+        	} else {
+        	 // other time your app loads
+        		return false;
+        	}
+        		//m_ProgressDialog.dismiss();
+				
+   
+    	}
+    		
+    	
+    	
+    
+    
+
+
     private class Adapter extends ArrayAdapter<String> {
     	
 
