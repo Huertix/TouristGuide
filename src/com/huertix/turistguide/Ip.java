@@ -1,5 +1,7 @@
 package com.huertix.turistguide;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.regex.Pattern;
 
@@ -42,21 +44,26 @@ public class Ip extends Activity {
 		
 		latTV.setText(extras.getString("lat"));
 		lngTV.setText(extras.getString("lng"));
-	
+		
+		loadImage(extras.getString("img"));
 	}
 	
 	
-	private void loadImage(){
-		File imgFile = new  File("/sdcard/TouristGuide/tmp/image/noimage.jpg");
+	private void loadImage(String path){
+		
+		if(!path.equals("")){
 
-		if(imgFile.exists()){
+		BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inSampleSize = 4;
+       
+        Bitmap bitmap = BitmapFactory.decodeFile( path, options );
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 40, out);
+        Bitmap decoded = BitmapFactory.decodeStream(new ByteArrayInputStream(out.toByteArray()));
 
-		    Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-
-
-		    imageTV.setImageBitmap(myBitmap);
-
+        imageTV.setImageBitmap(decoded);
 		}
+		
 	}
 	
 

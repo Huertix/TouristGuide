@@ -14,8 +14,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +32,7 @@ public class CityActivity extends Activity {
 	private String country_string;
 	private String city_string;
 	private ListView myListView;
+	private Button myButton;
 	private final int ID_MENU = 1;
 
 	@Override
@@ -39,6 +42,7 @@ public class CityActivity extends Activity {
 		
 		
 		myListView = (ListView) findViewById(R.id.list_ips);
+		myButton = (Button) findViewById(R.id.btn_ips);
 		
 		ips = new ArrayList<InterestedPoint>();
 		
@@ -67,7 +71,6 @@ public class CityActivity extends Activity {
 	        	extras.putString("name", ip.getName());
 	        	extras.putString("lat", ip.getLatitude());
 	        	extras.putString("lng", ip.getLongitude());
-	        	extras.putString("url", ip.getWikiUrl());
 	        	extras.putString("img",ip.getSrcPicture());
         	
 	        	Intent intent = new Intent(CityActivity.this, Ip.class);
@@ -76,6 +79,15 @@ public class CityActivity extends Activity {
 	        }
 
 	      });
+		
+		myButton.setOnClickListener(new OnClickListener() {
+			 
+            @Override
+            public void onClick(View view) {
+ 
+            	nextActivity(); 	
+            }
+        });
 		
 		Toast.makeText(getApplicationContext(),city_string, 
                 Toast.LENGTH_LONG).show();
@@ -138,13 +150,7 @@ public class CityActivity extends Activity {
     	if(item.getItemId() == ID_MENU)
     	{
     		
-    		Bundle extras = new Bundle();
-        	extras.putString("country",country_string);
-        	extras.putString("city",city_string);
-    		
-    		Intent intent = new Intent(CityActivity.this, AddPlace.class);
-    		intent.putExtras(extras);
-    		startActivity(intent);
+    		nextActivity();
 		
     		return true;
     	}
@@ -156,6 +162,16 @@ public class CityActivity extends Activity {
  	
     	return false;
     }
+	
+	private void nextActivity(){
+		Bundle extras = new Bundle();
+    	extras.putString("country",country_string);
+    	extras.putString("city",city_string);
+		
+		Intent intent = new Intent(CityActivity.this, AddPlace.class);
+		intent.putExtras(extras);
+		startActivity(intent);
+	}
 	
 	
     private class Adapter extends ArrayAdapter<InterestedPoint> {

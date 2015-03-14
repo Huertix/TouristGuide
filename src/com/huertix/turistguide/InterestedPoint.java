@@ -8,7 +8,6 @@ public class InterestedPoint {
 	private String name;
 	private String latitude;
 	private String longitude;
-	private String wikiUrl;
 	private String srcPicture;
 	
 	
@@ -80,15 +79,5 @@ public class InterestedPoint {
 	public void setLongitude(String longitude) {
 		this.longitude = longitude;
 	}
-
-	public String getWikiUrl() {
-		return wikiUrl;
-	}
-
-	public void setWikiUrl(String wikiUrl) {
-		this.wikiUrl = wikiUrl;
-	}
-	
-	
 
 }

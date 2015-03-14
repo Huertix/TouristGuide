@@ -26,7 +26,6 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     private static final String KEY_IP = "Interested_point";
     private static final String KEY_LAT = "latitude";
     private static final String KEY_LNG = "longitude";
-    private static final String KEY_WIKI = "url_wiki";
     private static final String KEY_PIC = "src_pic";
     
     
@@ -52,7 +51,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         String CREATE_PLACES_TABLE = "CREATE TABLE " + TABLE + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_COUNTRY + " TEXT,"
                 +KEY_CITY+" TEXT,"+ KEY_IP + " TEXT," +KEY_LAT+" TEXT,"+KEY_LNG
-                +" TEXT,"+KEY_WIKI+" TEXT,"+KEY_PIC+" TEXT"+")";
+                +" TEXT,"+KEY_PIC+" TEXT"+")";
         db.execSQL(CREATE_PLACES_TABLE);
     }
     
@@ -75,7 +74,6 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 		values.put(KEY_IP, ip.getName());
     	values.put(KEY_LAT, ip.getLatitude());
     	values.put(KEY_LNG, ip.getLongitude());
-    	values.put(KEY_WIKI,ip.getWikiUrl());
     	values.put(KEY_PIC, ip.getSrcPicture());
 
     try{	// Inserting Row
@@ -198,8 +196,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
             	ip.setName(cursor.getString(3));      	
             	ip.setLatitude(cursor.getString(4));
             	ip.setLongitude(cursor.getString(5));
-            	ip.setWikiUrl(cursor.getString(6));
-            	ip.setSrcPicture(cursor.getString(7));         	
+            	ip.setSrcPicture(cursor.getString(6));         	
             	ips.add(ip);         	
             }while(cursor.moveToNext());
         }     
@@ -223,7 +220,6 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 		values.put(KEY_IP, ip.getName());
     	values.put(KEY_LAT, ip.getLatitude());
     	values.put(KEY_LNG, ip.getLongitude());
-    	values.put(KEY_WIKI,ip.getWikiUrl());
     	values.put(KEY_PIC, ip.getSrcPicture());
      
         // updating row

@@ -6,6 +6,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.text.StringCharacterIterator;
+import java.util.Date;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -34,6 +37,7 @@ public class AddPlace extends Activity {
 	private static final int CODE_ACTIVITY_MAP = 1;	
 	private static final int CODE_ACTIVITY_CAMERA = 2;	
 	protected static final String PHOTO_TAKEN = "photo_taken";
+	protected static final String DIR_PATH = "/sdcard/TouristGuide/tmp/image/";
 	private DatabaseHandler data_handler; 
 	private Button button_save;
 	private Button button_take_pic;
@@ -48,6 +52,7 @@ public class AddPlace extends Activity {
 	protected ImageView img;
 	protected TextView _field;
 	protected String _path;
+	protected String _fileString;
 	protected boolean _taken;
 	protected AlertDialog alert;
 
@@ -67,8 +72,13 @@ public class AddPlace extends Activity {
 		_field = ( TextView ) findViewById( R.id.field );
 		
 		
-		_path = "/sdcard/TouristGuide/tmp/image/capture.jpg";
+		
+		
+		_fileString = new SimpleDateFormat("yyyyMMddHHmm").format(new Date());
+		_fileString=_fileString.concat(".jpg");
 		//img.setImageBitmap(loadImage(_path));
+		
+		_path = DIR_PATH+_fileString;
 		
 		
 		Bundle extras = getIntent().getExtras();
@@ -100,7 +110,7 @@ public class AddPlace extends Activity {
 	            	item.setName(ip.getText().toString());
 	            	item.setLatitude(lat.getText().toString());
 	            	item.setLongitude(lng.getText().toString());
-	            	//item.setWikiUrl(url.getText().toString());
+	            	item.setSrcPicture(_path);
 	            	
 	            	data_handler.addRow(item);
 	            	finish();
@@ -114,11 +124,11 @@ public class AddPlace extends Activity {
 	            @Override
 	            public void onClick(View view) {
 	           
-	            	File ImageDirectory = new File("/sdcard/TouristGuide/tmp/image/");
+	            	File ImageDirectory = new File(DIR_PATH);
 	            	if (!ImageDirectory.exists())
 	            		ImageDirectory.mkdirs();
 	            	
-	            	File file = new File(ImageDirectory, "capture.jpg");
+	            	File file = new File(ImageDirectory, _fileString);
 	                Uri outputFileUri = Uri.fromFile( file );
 	                
 	                	

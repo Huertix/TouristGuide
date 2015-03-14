@@ -31,11 +31,24 @@
 	    android:background="#55114388"
 	    android:text="@string/chooseip"/> 
 	    
-	<ListView
-	    android:id="@+id/list_ips"
+	<LinearLayout 
 	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"
-	    />
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical">   
+		<ListView
+		    android:id="@+id/list_ips"
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		    android:layout_weight="4"/>
+	
+	
+		<Button 
+	    	android:id="@+id/btn_ips"
+	    	android:layout_width="fill_parent"
+	    	android:layout_height="wrap_content"
+	    	android:layout_weight="1"
+	    	android:text="NEW POINT"/>
+	</LinearLayout> 
 	
 
 </LinearLayout>
