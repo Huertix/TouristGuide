@@ -16,5 +16,6 @@
     <string name="viewonmap">Map</string>
     <string name="viewar">AR</string>
     <string name="title_activity_map">Map</string>
+    <string name="title_activity_photo_capture_example">PhotoCaptureExample</string>
 
 </resources>
