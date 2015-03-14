@@ -45,7 +45,7 @@ import android.database.sqlite.SQLiteException;
 public class Main extends Activity  {
 	
 	private DatabaseHandler data_handler; 
-	private ProgressDialog m_ProgressDialog ;
+	//private ProgressDialog m_ProgressDialog;
 	private Adapter m_adapter;
 	private ListView myListView;
 	private Runnable viewCountries;
@@ -59,18 +59,8 @@ public class Main extends Activity  {
 		setContentView(R.layout.main);
 		
 		myListView = (ListView) findViewById(R.id.list_countries);
-		
-		// String[] planets = new String[] { "Mercury", "Venus", "Earth", "Mars",  
-        //        "Jupiter", "Saturn", "Uranus", "Neptune"}; 
-		
-		
+
 		countries = new ArrayList<String>();
-		
-		//countries.addAll(Arrays.asList(planets));
-		
-		//listAdapter = new ArrayAdapter<String>(this,R.layout.row_c,countries);
-		
-		//myListView.setAdapter(listAdapter);
 		
 		data_handler = new DatabaseHandler(this);
 		m_adapter = new Adapter(this, R.layout.row_c, countries);
@@ -90,31 +80,75 @@ public class Main extends Activity  {
 	    		startActivity(intent);
 	        }
 	          
-          
-	          /*view.animate().setDuration(2000).alpha(0).withEndAction(new Runnable() {
-	                @Override
-	                public void run() {
-	                  countries.remove(item);
-	                  m_adapter.notifyDataSetChanged();
-	                  view.setAlpha(1);
-	                }
-				});
-	        }*/
-
 	      });
 		
-		m_ProgressDialog = ProgressDialog.show(Main.this,    
-                "Please wait...", "Retrieving data ...", true);
-
-		viewCountries = new Runnable(){
+		
+		
+		//runOnUiThread(returnCities);
+		
+		final ProgressDialog m_ProgressDialog=ProgressDialog.show(Main.this, "", "Loading please wait..", true);
+		m_ProgressDialog.setCancelable(true);
+		runOnUiThread(new Runnable() {           
             @Override
-            public void run() {runOnUiThread(returnRes);}
-        };
-        
-		Thread thread =  new Thread(null, viewCountries, "MagentoBackground");
-        thread.start();
-        
-        m_ProgressDialog.dismiss();
+            public void run() {
+
+    	    	boolean mboolean = false;
+    	   	
+    	        	SharedPreferences settings = getSharedPreferences("PREFS_NAME", 0);
+    	        	mboolean = settings.getBoolean("FIRST_RUN", false);
+    	        	if (!mboolean) {
+    	        		m_ProgressDialog.show();
+    	        		// do the thing for the first time 
+    	        		AssetManager assetMan = getAssets();
+    	        		try {	
+    	        			
+    	    				InputStream is = assetMan.open("countries.xml"); 
+    	    				
+    	    				ParseSax ps = new ParseSax(is);   
+    	    				
+    	    				List<Country> ls = ps.returnList();
+    	    				
+    	    				Toast.makeText(getApplicationContext(),"Size: "+ls.size(),Toast.LENGTH_LONG).show();	
+    	    				
+    	    				Iterator i = ls.iterator();
+    	    				int k = 0;
+    	    				while(i.hasNext()){
+    	    					Country c = (Country) i.next();
+    	    					Iterator j = c.getCities().iterator();
+    	    					while(j.hasNext()){
+    	    						String s = (String) j.next();
+    	    						data_handler.addCityToTable(c.getName(), s);
+    	    						k++;
+    	    					}	
+    	    				}
+    	    				
+    	    				ps.cleanList();
+    	    				ls.clear();
+    	    				Toast.makeText(getApplicationContext(),"Size 2: "+k,Toast.LENGTH_LONG).show();	
+    	    				
+    	    					
+    	    				
+    	    			} catch (IOException e) {
+    	    				e.printStackTrace();
+    	    			} catch (Exception e){
+    	    				e.printStackTrace();
+    	    			}		
+    	        		settings = getSharedPreferences("PREFS_NAME", 0);
+    	    	        SharedPreferences.Editor editor = settings.edit();
+    	    	        editor.putBoolean("FIRST_RUN", true);
+    	    	        editor.commit();    
+    	    	       // return true;
+    	        	                    
+    	        	} else {
+    	        	 // other time your app loads
+    	        		//return false;
+    	        	}
+    	        	m_ProgressDialog.dismiss();
+        	}
+        });
+		
+		runOnUiThread(returnRes);
+    
 	}
 	
 	
@@ -125,51 +159,12 @@ public class Main extends Activity  {
 		runOnUiThread(returnRes);
 	}
 	
-	
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-    	
-		MenuItem itemAdd = menu.add(Menu.NONE,ID_MENU,Menu.NONE,R.string.addplace);
-		itemAdd.setShortcut('1', 'a');
-		
-		menu.add(Menu.NONE,ID_MENU+1,Menu.NONE,R.string.exit);
-		
-		return true;
-	}
-	
-	@Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-    	//check selected menu item
-    	if(item.getItemId() == ID_MENU)
-    	{
-    		
-    		Toast.makeText(getApplicationContext(),"AB", 
-                    Toast.LENGTH_LONG).show();
-    		
-    		Intent intent = new Intent(Main.this, AddPlace.class);
-    		startActivity(intent);
-		
-    		return true;
-    	}
-    	else if(item.getItemId() == ID_MENU+1){
-    		//close the Activity
-    		this.finish();
-    		return true;
-    	}
- 	
-    	return false;
-    }
-	
-	
-	
-	
-	private Runnable returnRes = new Runnable() {
 
+	private Runnable returnRes = new Runnable() {
+		
         @Override
         public void run() {
-	
+
         	List<String> lsFromDB = data_handler.getCountries();
         	countries.clear();
         	
@@ -179,69 +174,93 @@ public class Main extends Activity  {
         	}
        
             m_adapter.notifyDataSetChanged();           
-            loadCountries();
+            //loadCountries();
+            
            
         }
     };
     
-    private boolean loadCountries(){
+   /* private Runnable returnCities = new Runnable() {
+		
+        @Override
+        public void run() {
+        	final ProgressDialog m_ProgressDialog = ProgressDialog.show(Main.this, "Please wait...", "Retrieving data ...", true);
  	
-    	boolean mboolean = false;
-
-    	m_ProgressDialog = ProgressDialog.show(Main.this,    
-                "Please wait...", "Retrieving data ...", true);
-    	
-        	SharedPreferences settings = getSharedPreferences("PREFS_NAME", 0);
-        	mboolean = settings.getBoolean("FIRST_RUN", false);
-        	if (!mboolean) {
-        		// do the thing for the first time 
-        		AssetManager assetMan = getAssets();
-        		try {	
-        			
-    				InputStream is = assetMan.open("countries.xml"); 
-    				
-    				ParseSax ps = new ParseSax(is);   
-    				
-    				List<Country> ls = ps.returnList();
-    				
-    				Toast.makeText(getApplicationContext(),"Size: "+ls.size(),Toast.LENGTH_LONG).show();	
-    				
-    				Iterator i = ls.iterator();
-    				int k = 0;
-    				while(i.hasNext()){
-    					Country c = (Country) i.next();
-    					Iterator j = c.getCities().iterator();
-    					while(j.hasNext()){
-    						String s = (String) j.next();
-    						data_handler.addCityToTable(c.getName(), s);
-    						k++;
-    					}	
-    				}
-    				
-    				ps.cleanList();
-    				ls.clear();
-    				Toast.makeText(getApplicationContext(),"Size 2: "+k,Toast.LENGTH_LONG).show();	
-    				
-    					
-    				
-    			} catch (IOException e) {
-    				e.printStackTrace();
-    			} catch (Exception e){
-    				e.printStackTrace();
-    			}		
-        		settings = getSharedPreferences("PREFS_NAME", 0);
-    	        SharedPreferences.Editor editor = settings.edit();
-    	        editor.putBoolean("FIRST_RUN", true);
-    	        editor.commit(); 
-    	        m_ProgressDialog.dismiss();
-    	        return true;
-        	                    
-        	} else {
-        	 // other time your app loads
-        		m_ProgressDialog.dismiss();
-        		return false;
-        	}
+	    	boolean mboolean = false;
+	   	
+	        	SharedPreferences settings = getSharedPreferences("PREFS_NAME", 0);
+	        	mboolean = settings.getBoolean("FIRST_RUN", false);
+	        	if (!mboolean) {
+	        		// do the thing for the first time 
+	        		AssetManager assetMan = getAssets();
+	        		try {	
+	        			
+	    				InputStream is = assetMan.open("countries.xml"); 
+	    				
+	    				ParseSax ps = new ParseSax(is);   
+	    				
+	    				List<Country> ls = ps.returnList();
+	    				
+	    				Toast.makeText(getApplicationContext(),"Size: "+ls.size(),Toast.LENGTH_LONG).show();	
+	    				
+	    				Iterator i = ls.iterator();
+	    				int k = 0;
+	    				while(i.hasNext()){
+	    					Country c = (Country) i.next();
+	    					Iterator j = c.getCities().iterator();
+	    					while(j.hasNext()){
+	    						String s = (String) j.next();
+	    						data_handler.addCityToTable(c.getName(), s);
+	    						k++;
+	    					}	
+	    				}
+	    				
+	    				ps.cleanList();
+	    				ls.clear();
+	    				Toast.makeText(getApplicationContext(),"Size 2: "+k,Toast.LENGTH_LONG).show();	
+	    				
+	    					
+	    				
+	    			} catch (IOException e) {
+	    				e.printStackTrace();
+	    			} catch (Exception e){
+	    				e.printStackTrace();
+	    			}		
+	        		settings = getSharedPreferences("PREFS_NAME", 0);
+	    	        SharedPreferences.Editor editor = settings.edit();
+	    	        editor.putBoolean("FIRST_RUN", true);
+	    	        editor.commit();    
+	    	       // return true;
+	        	                    
+	        	} else {
+	        	 // other time your app loads
+	        		//return false;
+	        	}
+	        	m_ProgressDialog.dismiss();
     	}
+    };*/
+    
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+    	
+		MenuItem itemAdd = menu.add(Menu.NONE,ID_MENU,Menu.NONE,R.string.exit);
+		
+		return true;
+	}
+	
+	@Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+    	//check selected menu item
+    	if(item.getItemId() == ID_MENU){
+    		//close the Activity
+    		this.finish();
+    		return true;
+    	}
+ 	
+    	return false;
+    }
     		
     	
     	

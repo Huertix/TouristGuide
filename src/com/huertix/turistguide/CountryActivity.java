@@ -64,6 +64,7 @@ public class CountryActivity extends Activity {
 	        public void onItemClick(AdapterView<?> parent, final View view,int position, long id) {
 	        	final String item = (String) parent.getItemAtPosition(position);
 	        	Bundle extras = new Bundle();
+	        	extras.putString("country",country_string);
 	        	extras.putString("city",item);
         	
 	        	Intent intent = new Intent(CountryActivity.this, CityActivity.class);

@@ -5,14 +5,22 @@
    android:layout_height="fill_parent"
    >
    
-       
+    <TextView 
+	    android:id="@+id/country_activity_city"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:gravity="center"
+	    android:textSize="34dp"
+	    android:background="#AA114422"/>   
+	
+	
 	<TextView 
 	    android:id="@+id/city_activity_city"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
 	    android:gravity="center"
 	    android:textSize="34dp"
-	    android:background="#AA114422"/> 
+	    android:background="#AA114400"/> 
 	    
 	<TextView 
 	    android:id="@+id/choose_activity_city"
@@ -20,7 +28,7 @@
 	    android:layout_height="wrap_content"
 	    android:gravity="center"
 	    android:textSize="22dp"
-	    android:background="#55114400"
+	    android:background="#55114388"
 	    android:text="@string/chooseip"/> 
 	    
 	<ListView

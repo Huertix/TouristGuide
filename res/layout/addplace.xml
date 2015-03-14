@@ -12,23 +12,25 @@
 	    android:background="#55114422"
         android:text="@string/addplace" />
     
-     <EditText 
+     <TextView 
 	    android:id="@+id/addCountry"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
-	    android:hint="Country"/> 
+	    android:gravity="center"
+	    android:textSize="24dp"/> 
     
-    <EditText 
+    <TextView
 	    android:id="@+id/addCity"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
-	    android:hint="City"/> 
+	    android:gravity="center"
+	    android:textSize="20dp"/> 
 	    
     <EditText 
 	    android:id="@+id/addip"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
-	    android:hint="Interested Point"/> 
+	    android:hint="Introduce IP name"/> 
 	    
     <LinearLayout 
         android:orientation="horizontal"
@@ -46,7 +48,7 @@
 		    	android:layout_height="wrap_content"
 		    	android:text="Lat:"/>
         	
-        	<EditText 
+        	<TextView
 		   		android:id="@+id/addlatitude"
 		   	 	android:layout_width="fill_parent"
 		    	android:layout_height="wrap_content"
@@ -57,7 +59,7 @@
 		    	android:layout_height="wrap_content"
 		    	android:text="Lng:"/>
 		    
-	   	 	<EditText 
+	   	 	<TextView 
 		    	android:id="@+id/addlongitude"
 		    	android:layout_width="fill_parent"
 		    	android:layout_height="wrap_content"

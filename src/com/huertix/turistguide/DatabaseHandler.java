@@ -109,7 +109,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     public List<String> getCountries(){
     	List<String> countries = new ArrayList<String>();
     	
-    	String selectQuery = "SELECT "+KEY_COUNTRY+"  FROM " + TABLE+" ORDER BY "+KEY_COUNTRY;
+    	String selectQuery = "SELECT "+KEY_COUNTRY+"  FROM " + CITY_TABLE+" ORDER BY "+KEY_COUNTRY;
     	
     	SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -146,7 +146,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     	
     	Log.v("tag","Country: "+country);
     	
-    	String selectQuery = "SELECT "+KEY_CITY+"  FROM " + TABLE+" WHERE "+KEY_COUNTRY+"='"+country+"' ORDER BY "+KEY_CITY;
+    	String selectQuery = "SELECT "+KEY_CITY+"  FROM " + CITY_TABLE+" WHERE "+KEY_COUNTRY+"='"+country+"' ORDER BY "+KEY_CITY;
     	
     	SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);

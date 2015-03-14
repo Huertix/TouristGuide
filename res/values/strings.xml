@@ -6,7 +6,7 @@
     <string name="choosecountry">Choose a Country</string>
     <string name="choosecity">Choose a City</string>
     <string name="chooseip">Choose an Interested Point</string>
-    <string name="addplace">Add New Place</string>
+    <string name="addplace">New Place</string>
     <string name="exit">Exit Application</string>
     <string name="title_activity_add_place">AddPlace</string>
     <string name="action_settings">Settings</string>

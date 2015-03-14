@@ -14,8 +14,10 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Ip extends Activity {
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +51,9 @@ public class Ip extends Activity {
 		//imgTV.setImageResource(R.drawable.mountains);
 		latTV.setText(extras.getString("lat"));
 		lngTV.setText(extras.getString("lng"));
-		
 	
-		
 	}
+	
 
 	
 }

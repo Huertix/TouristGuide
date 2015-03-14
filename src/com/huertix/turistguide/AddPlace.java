@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.view.View.OnClickListener;
 
@@ -21,12 +22,15 @@ public class AddPlace extends Activity {
 	private Button button_getCoord;
 	private Button button_take_pic;
 	private Button button_map;
-	private EditText country;
-	private EditText city;
+	private TextView country;
+	private TextView city;
 	private EditText ip;
-	private EditText lat;
-	private EditText lng;
+	private TextView lat;
+	private TextView lng;
 	private EditText url;
+	private String country_string;
+	private String city_string;
+	
 	
 	
 	
@@ -37,12 +41,20 @@ public class AddPlace extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.addplace);
 		
-		country = (EditText) findViewById(R.id.addCountry);
-		city = (EditText) findViewById(R.id.addCity);
+		country = (TextView) findViewById(R.id.addCountry);
+		city = (TextView) findViewById(R.id.addCity);
 		ip = (EditText) findViewById(R.id.addip);
-		lat = (EditText) findViewById(R.id.addlatitude);
-		lng = (EditText) findViewById(R.id.addlongitude);
+		lat = (TextView) findViewById(R.id.addlatitude);
+		lng = (TextView) findViewById(R.id.addlongitude);
 		url = (EditText) findViewById(R.id.add_url_wiki);
+		
+		Bundle extras = getIntent().getExtras();
+		country_string = extras.getString("country");
+		city_string = extras.getString("city");
+			
+		country.setText(country_string);
+		city.setText(city_string);
+		
 		
 		data_handler = new DatabaseHandler(this);
 				
