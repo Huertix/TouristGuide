@@ -17,10 +17,13 @@ import android.app.Activity;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -44,14 +47,14 @@ import android.database.sqlite.SQLiteException;
 
 public class Main extends Activity  {
 	
+	private final static int ID_MENU = 1;
+	private final static int TOTAL_CITIES=4615;
 	private DatabaseHandler data_handler; 
-	//private ProgressDialog m_ProgressDialog;
+	private ProgressDialog pDialog;
 	private Adapter m_adapter;
 	private ListView myListView;
-	private Runnable viewCountries;
-	private Runnable parseCountries;
 	private ArrayList<String> countries;
-	private final int ID_MENU = 1;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -82,72 +85,10 @@ public class Main extends Activity  {
 	          
 	      });
 		
-		
-		
-		//runOnUiThread(returnCities);
-		
-		final ProgressDialog m_ProgressDialog=ProgressDialog.show(Main.this, "", "Loading please wait..", true);
-		m_ProgressDialog.setCancelable(true);
-		runOnUiThread(new Runnable() {           
-            @Override
-            public void run() {
 
-    	    	boolean mboolean = false;
-    	   	
-    	        	SharedPreferences settings = getSharedPreferences("PREFS_NAME", 0);
-    	        	mboolean = settings.getBoolean("FIRST_RUN", false);
-    	        	if (!mboolean) {
-    	        		m_ProgressDialog.show();
-    	        		// do the thing for the first time 
-    	        		AssetManager assetMan = getAssets();
-    	        		try {	
-    	        			
-    	    				InputStream is = assetMan.open("countries.xml"); 
-    	    				
-    	    				ParseSax ps = new ParseSax(is);   
-    	    				
-    	    				List<Country> ls = ps.returnList();
-    	    				
-    	    				Toast.makeText(getApplicationContext(),"Size: "+ls.size(),Toast.LENGTH_LONG).show();	
-    	    				
-    	    				Iterator i = ls.iterator();
-    	    				int k = 0;
-    	    				while(i.hasNext()){
-    	    					Country c = (Country) i.next();
-    	    					Iterator j = c.getCities().iterator();
-    	    					while(j.hasNext()){
-    	    						String s = (String) j.next();
-    	    						data_handler.addCityToTable(c.getName(), s);
-    	    						k++;
-    	    					}	
-    	    				}
-    	    				
-    	    				ps.cleanList();
-    	    				ls.clear();
-    	    				Toast.makeText(getApplicationContext(),"Size 2: "+k,Toast.LENGTH_LONG).show();	
-    	    				
-    	    					
-    	    				
-    	    			} catch (IOException e) {
-    	    				e.printStackTrace();
-    	    			} catch (Exception e){
-    	    				e.printStackTrace();
-    	    			}		
-    	        		settings = getSharedPreferences("PREFS_NAME", 0);
-    	    	        SharedPreferences.Editor editor = settings.edit();
-    	    	        editor.putBoolean("FIRST_RUN", true);
-    	    	        editor.commit();    
-    	    	       // return true;
-    	        	                    
-    	        	} else {
-    	        	 // other time your app loads
-    	        		//return false;
-    	        	}
-    	        	m_ProgressDialog.dismiss();
-        	}
-        });
+		loadCountries();
 		
-		runOnUiThread(returnRes);
+		
     
 	}
 	
@@ -164,88 +105,48 @@ public class Main extends Activity  {
 		
         @Override
         public void run() {
-
         	List<String> lsFromDB = data_handler.getCountries();
-        	countries.clear();
-        	
+        	countries.clear();       	
         	for(int i=0;i<lsFromDB.size();i++){
         		if(!countries.contains(lsFromDB.get(i)))
         			countries.add(lsFromDB.get(i));
-        	}
-       
-            m_adapter.notifyDataSetChanged();           
-            //loadCountries();
-            
-           
+        	}      
+            m_adapter.notifyDataSetChanged();              
         }
     };
     
-   /* private Runnable returnCities = new Runnable() {
-		
-        @Override
-        public void run() {
-        	final ProgressDialog m_ProgressDialog = ProgressDialog.show(Main.this, "Please wait...", "Retrieving data ...", true);
- 	
-	    	boolean mboolean = false;
-	   	
-	        	SharedPreferences settings = getSharedPreferences("PREFS_NAME", 0);
-	        	mboolean = settings.getBoolean("FIRST_RUN", false);
-	        	if (!mboolean) {
-	        		// do the thing for the first time 
-	        		AssetManager assetMan = getAssets();
-	        		try {	
-	        			
-	    				InputStream is = assetMan.open("countries.xml"); 
-	    				
-	    				ParseSax ps = new ParseSax(is);   
-	    				
-	    				List<Country> ls = ps.returnList();
-	    				
-	    				Toast.makeText(getApplicationContext(),"Size: "+ls.size(),Toast.LENGTH_LONG).show();	
-	    				
-	    				Iterator i = ls.iterator();
-	    				int k = 0;
-	    				while(i.hasNext()){
-	    					Country c = (Country) i.next();
-	    					Iterator j = c.getCities().iterator();
-	    					while(j.hasNext()){
-	    						String s = (String) j.next();
-	    						data_handler.addCityToTable(c.getName(), s);
-	    						k++;
-	    					}	
-	    				}
-	    				
-	    				ps.cleanList();
-	    				ls.clear();
-	    				Toast.makeText(getApplicationContext(),"Size 2: "+k,Toast.LENGTH_LONG).show();	
-	    				
-	    					
-	    				
-	    			} catch (IOException e) {
-	    				e.printStackTrace();
-	    			} catch (Exception e){
-	    				e.printStackTrace();
-	    			}		
-	        		settings = getSharedPreferences("PREFS_NAME", 0);
-	    	        SharedPreferences.Editor editor = settings.edit();
-	    	        editor.putBoolean("FIRST_RUN", true);
-	    	        editor.commit();    
-	    	       // return true;
-	        	                    
-	        	} else {
-	        	 // other time your app loads
-	        		//return false;
-	        	}
-	        	m_ProgressDialog.dismiss();
-    	}
-    };*/
     
-	
+    private void loadCountries(){
+
+    	boolean mboolean = false;
+
+    	SharedPreferences settings = getSharedPreferences("PREFS_NAME", 0);
+    	mboolean = settings.getBoolean("FIRST_RUN", false);
+    	if (!mboolean) {
+
+    		// do the thing for the first time
+    		new LoadCountriesTask().execute();	
+    			
+    		settings = getSharedPreferences("PREFS_NAME", 0);
+	        SharedPreferences.Editor editor = settings.edit();
+	        editor.putBoolean("FIRST_RUN", true);
+	        editor.commit();    
+	       // return true;
+    	                    
+    	} else {
+    	 // other time your app loads
+    		//return false;
+    	}
+    	
+        	
+    	
+    }
+    
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
     	
-		MenuItem itemAdd = menu.add(Menu.NONE,ID_MENU,Menu.NONE,R.string.exit);
-		
+		MenuItem itemAdd = menu.add(Menu.NONE,ID_MENU,Menu.NONE,R.string.exit);		
 		return true;
 	}
 	
@@ -261,12 +162,39 @@ public class Main extends Activity  {
  	
     	return false;
     }
-    		
-    	
-    	
-    
-    
+	
+	private void task(){
+		int k=0;
+		
+		try {	
+			AssetManager assetMan = getAssets();
+			InputStream is = assetMan.open("countries.xml"); 
+			
+			ParseSax ps = new ParseSax(is);   
+			
+			List<Country> ls = ps.returnList();	
 
+			Iterator<Country> i = ls.iterator();
+			while(i.hasNext()){
+				Country c = (Country) i.next();
+				Iterator<String> j = c.getCities().iterator();
+				while(j.hasNext()){
+					String s = (String) j.next();
+					data_handler.addCityToTable(c.getName(), s);
+					k++;
+				}	
+			}
+			
+			ps.cleanList();
+			ls.clear();
+	
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+	
 
     private class Adapter extends ArrayAdapter<String> {
     	
@@ -295,6 +223,113 @@ public class Main extends Activity  {
                 return v;
         }
 		
+    }
+    
+    
+    public class LoadCountriesTask extends AsyncTask<Void, Integer, Boolean> {
+    	
+
+    	@Override
+    	protected Boolean doInBackground(Void... params) {
+    		
+    		/*for(int i=1; i<=10; i++) {
+    			tareaLarga();
+    			publishProgress(i*10);
+    			if(isCancelled())
+    			break;
+    		}*/
+    		
+    		try {	
+    			
+    			synchronized(this){
+    				
+    				int k = 0;	
+	    			AssetManager assetMan = getAssets();
+	    			InputStream is = assetMan.open("countries.xml"); 
+	    			
+	    			ParseSax ps = new ParseSax(is);   
+	    			
+	    			List<Country> ls = ps.returnList();	
+	
+	    			Iterator<Country> i = ls.iterator();
+	    			while(i.hasNext()){
+	    				Country c = (Country) i.next();
+	    				Iterator<String> j = c.getCities().iterator();
+	    				while(j.hasNext()){
+	    					String s = (String) j.next();
+	    					data_handler.addCityToTable(c.getName(), s);
+	    					publishProgress(k++);
+	    				}
+	    				
+	    			}
+	    			ps.cleanList();
+	    			ls.clear();
+    			}
+    			
+    			
+    	
+    		} catch (IOException e) {
+    			e.printStackTrace();
+    		} catch (Exception e){
+    			e.printStackTrace();
+    		}
+
+			return true;	
+							
+    	}
+    	
+    	@Override
+    	protected void onProgressUpdate(Integer... values) {
+    		int progreso = values[0].intValue();
+    		pDialog.setProgress(progreso);
+    	}
+    	
+    	
+    	@Override
+    	protected void onPreExecute() {
+    		
+			//Create a new progress dialog
+    		pDialog = new ProgressDialog(Main.this);
+			//Set the progress dialog to display a horizontal progress bar 
+    		pDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+			//Set the dialog title to 'Loading...'
+    		pDialog.setTitle("Loading Cities to the Data Base...");
+			//Set the dialog message to 'Loading application View, please wait...'
+    		pDialog.setMessage("First Running Time.");
+			//This dialog can't be canceled by pressing the back key
+    		pDialog.setCancelable(false);
+			//This dialog isn't indeterminate
+    		pDialog.setIndeterminate(false);
+			//The maximum number of items is 100
+    		pDialog.setMax(TOTAL_CITIES);
+			//Set the current progress to zero
+    		pDialog.setProgress(0);
+			//
+			pDialog.setOnCancelListener(new OnCancelListener() {
+    			@Override
+    			public void onCancel(DialogInterface dialog) {
+    				LoadCountriesTask.this.cancel(true);
+    			}
+    		});
+			//pDialog the progress dialog
+			pDialog.show();
+    		
+    	}
+    	
+    	@Override
+    	protected void onPostExecute(Boolean result) {
+    		if(result){
+    			pDialog.dismiss();
+    			Toast.makeText(Main.this, "4615 Loaded Cities!", Toast.LENGTH_SHORT).show();
+    			runOnUiThread(returnRes);
+    		}
+    	}
+    	
+    	@Override
+    	protected void onCancelled() {
+    		Toast.makeText(Main.this, "Tarea cancelada!",Toast.LENGTH_SHORT).show();
+    	}
+    	
     }
 
 
