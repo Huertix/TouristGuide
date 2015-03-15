@@ -1283,7 +1283,7 @@
             </SimpleGeoName>
             <SimpleGeoName>
               <Id>7603254</Id>
-              <Name>Région de la Ville de N'Djaména</Name>
+              <Name>Région de la Ville de N Djaména</Name>
               <Children />
               <FCode>ADM1</FCode>
               <CountryCode>TD</CountryCode>
@@ -3137,7 +3137,7 @@
             </SimpleGeoName>
             <SimpleGeoName>
               <Id>7670904</Id>
-              <Name>Amoron'i Mania</Name>
+              <Name>Amoron i Mania</Name>
               <Children />
               <FCode>ADM1</FCode>
               <CountryCode>MG</CountryCode>
@@ -3416,21 +3416,21 @@
             </SimpleGeoName>
             <SimpleGeoName>
               <Id>2381972</Id>
-              <Name>Wilaya de l'Adrar</Name>
+              <Name>Wilaya de l Adrar</Name>
               <Children />
               <FCode>ADM1</FCode>
               <CountryCode>MR</CountryCode>
             </SimpleGeoName>
             <SimpleGeoName>
               <Id>2381344</Id>
-              <Name>Wilaya de l'Assaba</Name>
+              <Name>Wilaya de l Assaba</Name>
               <Children />
               <FCode>ADM1</FCode>
               <CountryCode>MR</CountryCode>
             </SimpleGeoName>
             <SimpleGeoName>
               <Id>2378903</Id>
-              <Name>Wilaya de l'Inchiri</Name>
+              <Name>Wilaya de l Inchiri</Name>
               <Children />
               <FCode>ADM1</FCode>
               <CountryCode>MR</CountryCode>
@@ -3669,7 +3669,7 @@
             </SimpleGeoName>
             <SimpleGeoName>
               <Id>7521433</Id>
-              <Name>M'Tsangamouji</Name>
+              <Name>M Tsangamouji</Name>
               <Children />
               <FCode>ADM1</FCode>
               <CountryCode>YT</CountryCode>
@@ -6850,7 +6850,7 @@
             </SimpleGeoName>
             <SimpleGeoName>
               <Id>6690916</Id>
-              <Name>Îles Éparses de l'océan Indien</Name>
+              <Name>Îles Éparses de l océan Indien</Name>
               <Children />
               <FCode>ADM1</FCode>
               <CountryCode>TF</CountryCode>
@@ -8617,7 +8617,7 @@
             </SimpleGeoName>
             <SimpleGeoName>
               <Id>611716</Id>
-              <Name>K'alak'i T'bilisi</Name>
+              <Name>K alak i T bilisi</Name>
               <Children />
               <FCode>ADM1</FCode>
               <CountryCode>GE</CountryCode>
@@ -14602,7 +14602,7 @@
           <Children>
             <SimpleGeoName>
               <Id>3041566</Id>
-              <Name>Parròquia d'Andorra la Vella</Name>
+              <Name>Parròquia d Andorra la Vella</Name>
               <Children />
               <FCode>ADM1</FCode>
               <CountryCode>AD</CountryCode>
@@ -14610,7 +14610,7 @@
             </SimpleGeoName>
             <SimpleGeoName>
               <Id>3040684</Id>
-              <Name>Parròquia d'Encamp</Name>
+              <Name>Parròquia d Encamp</Name>
               <Children />
               <FCode>ADM1</FCode>
               <CountryCode>AD</CountryCode>
@@ -14618,7 +14618,7 @@
             </SimpleGeoName>
             <SimpleGeoName>
               <Id>3338529</Id>
-              <Name>Parròquia d'Escaldes-Engordany</Name>
+              <Name>Parròquia d Escaldes-Engordany</Name>
               <Children />
               <FCode>ADM1</FCode>
               <CountryCode>AD</CountryCode>
@@ -14626,7 +14626,7 @@
             </SimpleGeoName>
             <SimpleGeoName>
               <Id>3039676</Id>
-              <Name>Parròquia d'Ordino</Name>
+              <Name>Parròquia d Ordino</Name>
               <Children />
               <FCode>ADM1</FCode>
               <CountryCode>AD</CountryCode>
@@ -16008,11 +16008,11 @@
             </SimpleGeoName>
             <SimpleGeoName>
               <Id>2985244</Id>
-              <Name>Provence-Alpes-Côte d'Azur</Name>
+              <Name>Provence-Alpes-Côte d Azur</Name>
               <Children />
               <FCode>ADM1</FCode>
               <CountryCode>FR</CountryCode>
-              <LocalNameEN>Provence-Alpes-Côte d'Azur</LocalNameEN>
+              <LocalNameEN>Provence-Alpes-Côte d Azur</LocalNameEN>
               <LocalNameES>Provenza-Alpes-Costa Azul</LocalNameES>
             </SimpleGeoName>
             <SimpleGeoName>
@@ -19499,11 +19499,11 @@
             </SimpleGeoName>
             <SimpleGeoName>
               <Id>2562557</Id>
-              <Name>St. Julian's</Name>
+              <Name>St. Julian s</Name>
               <Children />
               <FCode>PPL</FCode>
               <CountryCode>MT</CountryCode>
-              <LocalNameEN>St. Julian's</LocalNameEN>
+              <LocalNameEN>St. Julian s</LocalNameEN>
               <LocalNameES>San Julián</LocalNameES>
             </SimpleGeoName>
             <SimpleGeoName>
@@ -21736,7 +21736,7 @@
             </SimpleGeoName>
             <SimpleGeoName>
               <Id>498671</Id>
-              <Name>Saratovskaya Oblast'</Name>
+              <Name>Saratovskaya Oblast </Name>
               <Children />
               <FCode>ADM1</FCode>
               <CountryCode>RU</CountryCode>
@@ -21764,7 +21764,7 @@
             </SimpleGeoName>
             <SimpleGeoName>
               <Id>484638</Id>
-              <Name>Tambovskaya Oblast'</Name>
+              <Name>Tambovskaya Oblast </Name>
               <Children />
               <FCode>ADM1</FCode>
               <CountryCode>RU</CountryCode>
@@ -21778,7 +21778,7 @@
             </SimpleGeoName>
             <SimpleGeoName>
               <Id>480508</Id>
-              <Name>Tul'skaya Oblast'</Name>
+              <Name>Tul skaya Oblast </Name>
               <Children />
               <FCode>ADM1</FCode>
               <CountryCode>RU</CountryCode>
@@ -24064,7 +24064,7 @@
             </SimpleGeoName>
             <SimpleGeoName>
               <Id>709929</Id>
-              <Name>Dnipropetrovska Oblast'</Name>
+              <Name>Dnipropetrovska Oblast </Name>
               <Children />
               <FCode>ADM1</FCode>
               <CountryCode>UA</CountryCode>
@@ -24752,7 +24752,7 @@
               <Children />
               <FCode>ADM1</FCode>
               <CountryCode>AG</CountryCode>
-              <LocalNameES>St. John's</LocalNameES>
+              <LocalNameES>St. John s</LocalNameES>
             </SimpleGeoName>
             <SimpleGeoName>
               <Id>3576018</Id>
@@ -25613,7 +25613,7 @@
             </SimpleGeoName>
             <SimpleGeoName>
               <Id>3572312</Id>
-              <Name>Governor's Harbour District</Name>
+              <Name>Governor s Harbour District</Name>
               <Children />
               <FCode>ADM1</FCode>
               <CountryCode>BS</CountryCode>
@@ -28130,21 +28130,21 @@
             </SimpleGeoName>
             <SimpleGeoName>
               <Id>3731053</Id>
-              <Name>Département de l'Artibonite</Name>
+              <Name>Département de l Artibonite</Name>
               <Children />
               <FCode>ADM1</FCode>
               <CountryCode>HT</CountryCode>
             </SimpleGeoName>
             <SimpleGeoName>
               <Id>3719432</Id>
-              <Name>Département de l'Ouest</Name>
+              <Name>Département de l Ouest</Name>
               <Children />
               <FCode>ADM1</FCode>
               <CountryCode>HT</CountryCode>
             </SimpleGeoName>
             <SimpleGeoName>
               <Id>3724613</Id>
-              <Name>Département de la Grand'Anse</Name>
+              <Name>Département de la Grand Anse</Name>
               <Children />
               <FCode>ADM1</FCode>
               <CountryCode>HT</CountryCode>
@@ -30023,7 +30023,7 @@
             </SimpleGeoName>
             <SimpleGeoName>
               <Id>6984590</Id>
-              <Name>Friar's Bay</Name>
+              <Name>Friar s Bay</Name>
               <Children />
               <FCode>PPLL</FCode>
               <CountryCode>MF</CountryCode>
@@ -32751,7 +32751,7 @@
             </SimpleGeoName>
             <SimpleGeoName>
               <Id>2190146</Id>
-              <Name>Hawke's Bay</Name>
+              <Name>Hawke s Bay</Name>
               <Children />
               <FCode>ADM1</FCode>
               <CountryCode>NZ</CountryCode>
@@ -33341,7 +33341,7 @@
           <Children>
             <SimpleGeoName>
               <Id>4035434</Id>
-              <Name>A`ana</Name>
+              <Name>A ana</Name>
               <Children />
               <FCode>ADM1</FCode>
               <CountryCode>WS</CountryCode>
@@ -33362,14 +33362,14 @@
             </SimpleGeoName>
             <SimpleGeoName>
               <Id>4035383</Id>
-              <Name>Fa`asaleleaga</Name>
+              <Name>Fa asaleleaga</Name>
               <Children />
               <FCode>ADM1</FCode>
               <CountryCode>WS</CountryCode>
             </SimpleGeoName>
             <SimpleGeoName>
               <Id>4035314</Id>
-              <Name>Gaga`emauga</Name>
+              <Name>Gaga emauga</Name>
               <Children />
               <FCode>ADM1</FCode>
               <CountryCode>WS</CountryCode>
@@ -33390,7 +33390,7 @@
             </SimpleGeoName>
             <SimpleGeoName>
               <Id>4035046</Id>
-              <Name>Satupa`itea</Name>
+              <Name>Satupa itea</Name>
               <Children />
               <FCode>ADM1</FCode>
               <CountryCode>WS</CountryCode>
@@ -33404,7 +33404,7 @@
             </SimpleGeoName>
             <SimpleGeoName>
               <Id>4034943</Id>
-              <Name>Va`a-o-Fonoti</Name>
+              <Name>Va a-o-Fonoti</Name>
               <Children />
               <FCode>ADM1</FCode>
               <CountryCode>WS</CountryCode>
@@ -33547,7 +33547,7 @@
             </SimpleGeoName>
             <SimpleGeoName>
               <Id>4032637</Id>
-              <Name>Ha`apai</Name>
+              <Name>Ha apai</Name>
               <Children />
               <FCode>ADM1</FCode>
               <CountryCode>TO</CountryCode>
@@ -33568,7 +33568,7 @@
             </SimpleGeoName>
             <SimpleGeoName>
               <Id>4032231</Id>
-              <Name>Vava`u</Name>
+              <Name>Vava u</Name>
               <Children />
               <FCode>ADM1</FCode>
               <CountryCode>TO</CountryCode>
@@ -33782,14 +33782,14 @@
           <Children>
             <SimpleGeoName>
               <Id>4034884</Id>
-              <Name>Circonscription d'Alo</Name>
+              <Name>Circonscription d Alo</Name>
               <Children />
               <FCode>ADM1</FCode>
               <CountryCode>WF</CountryCode>
             </SimpleGeoName>
             <SimpleGeoName>
               <Id>4034759</Id>
-              <Name>Circonscription d'Uvéa</Name>
+              <Name>Circonscription d Uvéa</Name>
               <Children />
               <FCode>ADM1</FCode>
               <CountryCode>WF</CountryCode>

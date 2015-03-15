@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">TuristGuide</string>
+    <string name="app_name">TouristGuide</string>
     <string name="hello_world">Hello world!</string>
     <string name="choosecountry">Choose a Country</string>
     <string name="choosecity">Choose a City</string>

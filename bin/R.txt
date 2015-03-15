@@ -102,6 +102,7 @@ int drawable mountains 0x7f02001f
 int drawable noimage 0x7f020020
 int drawable powered_by_google_dark 0x7f020021
 int drawable powered_by_google_light 0x7f020022
+int drawable splash 0x7f020023
 int id action_settings 0x7f0b0039
 int id addCity 0x7f0b0018
 int id addCountry 0x7f0b0017

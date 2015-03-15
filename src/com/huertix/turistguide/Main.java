@@ -87,9 +87,7 @@ public class Main extends Activity  {
 		
 
 		loadCountries();
-		
-		
-    
+
 	}
 	
 	
@@ -163,42 +161,9 @@ public class Main extends Activity  {
     	return false;
     }
 	
-	private void task(){
-		int k=0;
-		
-		try {	
-			AssetManager assetMan = getAssets();
-			InputStream is = assetMan.open("countries.xml"); 
-			
-			ParseSax ps = new ParseSax(is);   
-			
-			List<Country> ls = ps.returnList();	
-
-			Iterator<Country> i = ls.iterator();
-			while(i.hasNext()){
-				Country c = (Country) i.next();
-				Iterator<String> j = c.getCities().iterator();
-				while(j.hasNext()){
-					String s = (String) j.next();
-					data_handler.addCityToTable(c.getName(), s);
-					k++;
-				}	
-			}
-			
-			ps.cleanList();
-			ls.clear();
-	
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (Exception e){
-			e.printStackTrace();
-		}
-	}
-	
 
     private class Adapter extends ArrayAdapter<String> {
     	
-
 
         private ArrayList<String> items;
 
@@ -231,14 +196,7 @@ public class Main extends Activity  {
 
     	@Override
     	protected Boolean doInBackground(Void... params) {
-    		
-    		/*for(int i=1; i<=10; i++) {
-    			tareaLarga();
-    			publishProgress(i*10);
-    			if(isCancelled())
-    			break;
-    		}*/
-    		
+
     		try {	
     			
     			synchronized(this){
@@ -255,6 +213,7 @@ public class Main extends Activity  {
 	    			while(i.hasNext()){
 	    				Country c = (Country) i.next();
 	    				Iterator<String> j = c.getCities().iterator();
+	    		
 	    				while(j.hasNext()){
 	    					String s = (String) j.next();
 	    					data_handler.addCityToTable(c.getName(), s);
@@ -265,9 +224,7 @@ public class Main extends Activity  {
 	    			ps.cleanList();
 	    			ls.clear();
     			}
-    			
-    			
-    	
+  	
     		} catch (IOException e) {
     			e.printStackTrace();
     		} catch (Exception e){
@@ -293,9 +250,9 @@ public class Main extends Activity  {
 			//Set the progress dialog to display a horizontal progress bar 
     		pDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 			//Set the dialog title to 'Loading...'
-    		pDialog.setTitle("Loading Cities to the Data Base...");
+    		pDialog.setTitle("Parsing Cities to Data Base...");
 			//Set the dialog message to 'Loading application View, please wait...'
-    		pDialog.setMessage("First Running Time.");
+    		pDialog.setMessage("First Time Running.");
 			//This dialog can't be canceled by pressing the back key
     		pDialog.setCancelable(false);
 			//This dialog isn't indeterminate
@@ -312,15 +269,14 @@ public class Main extends Activity  {
     			}
     		});
 			//pDialog the progress dialog
-			pDialog.show();
-    		
+			pDialog.show();  		
     	}
     	
     	@Override
     	protected void onPostExecute(Boolean result) {
     		if(result){
     			pDialog.dismiss();
-    			Toast.makeText(Main.this, "4615 Loaded Cities!", Toast.LENGTH_SHORT).show();
+    			Toast.makeText(Main.this, "4615 Cities Loaded!", Toast.LENGTH_SHORT).show();
     			runOnUiThread(returnRes);
     		}
     	}
@@ -330,18 +286,5 @@ public class Main extends Activity  {
     		Toast.makeText(Main.this, "Tarea cancelada!",Toast.LENGTH_SHORT).show();
     	}
     	
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-	
+    }	
 }

@@ -11,6 +11,7 @@
         android:adjustViewBounds="true"
         android:maxWidth="300dp"  
   		android:maxHeight="300dp" 
-        android:src="@drawable/ic_launcher" />
+  		android:background="#b9de0a"
+        android:src="@drawable/splash" />
  
 </RelativeLayout>
