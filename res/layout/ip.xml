@@ -101,14 +101,14 @@
 	    </LinearLayout>
 	    
 	    <Button
-	        android:id="@+id/mapbutton"
+	        android:id="@+id/map_ip_btn"
 	        android:layout_width="0dp"
 	        android:layout_height="match_parent"
 	        android:layout_weight="1"
 	        android:text="@string/viewonmap" />
 	    
 	    <Button
-	        android:id="@+id/arbutton"
+	        android:id="@+id/ar_ip_btn"
 	        android:layout_width="0dp"
 	        android:layout_height="match_parent"
 	        android:text="@string/viewar" 

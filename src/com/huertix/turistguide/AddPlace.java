@@ -104,16 +104,37 @@ public class AddPlace extends Activity {
 	            @Override
 	            public void onClick(View view) {
 	            	
-	            	InterestedPoint item = new InterestedPoint();
-	            	item.setCountry(country.getText().toString());
-	            	item.setCity(city.getText().toString());
-	            	item.setName(ip.getText().toString());
-	            	item.setLatitude(lat.getText().toString());
-	            	item.setLongitude(lng.getText().toString());
-	            	item.setSrcPicture(_path);
 	            	
-	            	data_handler.addRow(item);
-	            	finish();
+	            	if(ip.getText().toString().equals("") || 
+	            			lat.getText().toString().equals("") || _path.equals("")){
+	            		Toast.makeText(getApplicationContext(),"All the information must be provided before save", 
+	                            Toast.LENGTH_LONG).show();
+	            		if(ip.getText().toString().equals("")){
+	            			Toast.makeText(getApplicationContext(),"Introduce IP name", 
+		                            Toast.LENGTH_LONG).show();
+	            		}
+	            		else if(lat.getText().toString().equals("")){
+	            			Toast.makeText(getApplicationContext(),"Get Location point by pression MAP button", 
+		                            Toast.LENGTH_LONG).show();
+	            		}
+	            		else if(_path.equals("")){
+	            			Toast.makeText(getApplicationContext(),"Take a Picture", 
+		                            Toast.LENGTH_LONG).show();
+	            		}
+	            		
+	            		
+	            	}
+	            	else{
+	            		InterestedPoint item = new InterestedPoint();
+	                   	item.setCountry(country.getText().toString());
+		            	item.setCity(city.getText().toString());
+		            	item.setName(ip.getText().toString());
+		            	item.setLatitude(lat.getText().toString());
+		            	item.setLongitude(lng.getText().toString());
+		            	item.setSrcPicture(_path);	            	
+		            	data_handler.addRow(item);
+		            	finish();
+	            	}
 	            }
 	 
 	        });

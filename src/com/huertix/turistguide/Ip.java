@@ -15,8 +15,11 @@ import android.text.util.Linkify;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,7 +28,11 @@ public class Ip extends Activity {
 	
 	private DatabaseHandler dbHandler;
 	private String placeString;
+	private String lat;
+	private String lng;
 	private ImageView imageTV;
+	private Button map_btn;
+	private Button ar_btn;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,15 +44,37 @@ public class Ip extends Activity {
 		TextView latTV = (TextView) findViewById(R.id.lat_ip_act);
 		TextView lngTV = (TextView) findViewById(R.id.lng_ip_act);
 		TextView distTV = (TextView) findViewById(R.id.dist_ip_act);
+		map_btn = (Button) findViewById(R.id.map_ip_btn);
+		ar_btn = (Button) findViewById(R.id.ar_ip_btn);
+
 		
 		Bundle extras = getIntent().getExtras();
 		placeString = extras.getString("name");
 		nameTV.setText(placeString);
 		
-		latTV.setText(extras.getString("lat"));
-		lngTV.setText(extras.getString("lng"));
+		lat = extras.getString("lat");
+		latTV.setText(lat);
+		lng = extras.getString("lng");
+		lngTV.setText(lng);
 		
 		loadImage(extras.getString("img"));
+		
+		map_btn.setOnClickListener(new OnClickListener() {
+			 
+            @Override
+            public void onClick(View view) {
+
+            	Bundle extras = new Bundle();
+	        	extras.putString("ip",placeString);
+	        	extras.putString("lat",lat);
+	        	extras.putString("lng",lng);
+        	
+	        	Intent intent = new Intent(Ip.this, MapIp.class);
+	        	intent.putExtras(extras);
+	        	startActivity(intent);
+            	
+            }
+		});
 	}
 	
 	

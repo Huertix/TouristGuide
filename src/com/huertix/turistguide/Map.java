@@ -35,11 +35,8 @@ import android.widget.Toast;
 
 public class Map extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapLoadedCallback, GoogleMap.OnMarkerClickListener{
 	
-	private static final int CODE_ACTIVITY_MAP = 1;
+
 	private static final int MAP_ZOOM = 3;
-	private MapView mapview;
-	private MapController map_controller;
-	private GeoPoint geop;
 	private Button ok_map_btn;
 	private Button rm_map_btn;
 	private Marker marker;
